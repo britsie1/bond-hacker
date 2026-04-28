@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f766e;
+  --color-primary-light: #14b8a6;
+  --color-primary-dark: #0d5c56;
+  --color-secondary: #f59e0b;
+  --color-accent: #ef4444;
+  --color-success: #10b981;
+  
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+}
+
+@layer base {
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: #334155;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-[var(--bg)] text-[var(--text)] transition-colors duration-300;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .wizard-card {
+    @apply bg-[var(--surface)] rounded-2xl p-6 mb-4 shadow-sm border border-[var(--border)] transition-all;
+  }
+  
+  .input-wrapper {
+    @apply relative border-2 border-[var(--border)] rounded-xl bg-[var(--bg)] transition-all overflow-hidden focus-within:border-primary-light focus-within:bg-[var(--surface)] focus-within:ring-4 focus-within:ring-primary/10;
+  }
+
+  .input-field {
+    @apply w-full py-3 px-4 bg-transparent outline-none text-[var(--text)];
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-br from-primary to-primary-dark text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-primary/30 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/40 active:scale-95 transition-all flex items-center justify-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-[var(--surface)] text-[var(--text)] border-2 border-[var(--border)] font-semibold py-4 px-6 rounded-xl hover:border-primary hover:text-primary active:scale-95 transition-all flex items-center justify-center gap-2;
+  }
+}
