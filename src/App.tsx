@@ -23,11 +23,37 @@ function App() {
   const [isNewLoan, setIsNewLoan] = useState(false);
 
   useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state && event.state.step) {
+        setCurrentStep(event.state.step);
+      } else {
+        setCurrentStep(1);
+      }
+    };
+
+    if (!window.history.state || !window.history.state.step) {
+      window.history.replaceState({ step: currentStep }, '');
+    }
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    const historyStep = window.history.state?.step;
+    if (historyStep !== currentStep) {
+      window.history.pushState({ step: currentStep }, '');
+    }
     window.scrollTo(0, 0);
   }, [currentStep]);
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
-  const handleBack = () => setCurrentStep(Math.max(1, currentStep - 1));
+  const handleBack = () => {
+    if (currentStep > 1) {
+      // Prefer using the browser's history so the back button stack stays clean
+      window.history.back();
+    }
+  };
 
   return (
     <div className="min-h-screen pb-10">
@@ -69,6 +95,7 @@ function App() {
               onReset={() => setCurrentStep(1)}
               inputs={inputs}
               results={results}
+              strategies={strategies}
             />
           </div>
         </div>

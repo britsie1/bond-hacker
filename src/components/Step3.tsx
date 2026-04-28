@@ -1,10 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { RotateCcw, ListChecks, TrendingDown, Share, Printer } from 'lucide-react';
 import { SummaryCard } from './Step3/SummaryCard';
 import { ComparisonChart } from './Step3/ComparisonChart';
 import { ProTips } from './Step3/ProTips';
+import { ShareDialog } from './Step3/ShareDialog';
 import { Card } from './ui/Card';
 import type { LoanInputs, StrategyResult } from '../hooks/useBondState';
+import type { Strategy } from '../utils/urlState';
 import { formatCurrency } from '../utils/formatters';
 import { format, addMonths } from 'date-fns';
 
@@ -12,6 +14,7 @@ interface Step3Props {
   onReset: () => void;
   inputs: LoanInputs;
   results: StrategyResult[];
+  strategies: Strategy[];
 }
 
 export interface ChartEntry {
@@ -20,7 +23,8 @@ export interface ChartEntry {
   [key: string]: string | number;
 }
 
-export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results }) => {
+export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategies }) => {
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const baselineResult = results.find(r => r.strategy.id === 'baseline');
   
   const chartData = useMemo(() => {
@@ -61,7 +65,10 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results }) => {
         </p>
 
         <div className="flex items-center justify-center gap-3 mt-6">
-          <button className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-primary hover:border-primary transition-all font-bold text-xs shadow-sm active:scale-95">
+          <button 
+            onClick={() => setIsShareOpen(true)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-primary hover:border-primary transition-all font-bold text-xs shadow-sm active:scale-95"
+          >
             <Share size={16} />
             Share
           </button>
@@ -121,6 +128,12 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results }) => {
         <RotateCcw size={18} />
         Start Over
       </button>
+
+      <ShareDialog 
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+        appState={{ inputs, strategies }}
+      />
     </div>
   );
 };

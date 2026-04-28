@@ -53,7 +53,7 @@ export function decodeState(hash: string): AppState | null {
 
 export function generateShareUrl(state: AppState): string {
   const hash = encodeState(state);
-  const url = new URL(window.location.origin + window.location.pathname);
+  const url = new URL('https://bondhacker.netlify.app');
   url.searchParams.set('s', hash);
   return url.toString();
 }
