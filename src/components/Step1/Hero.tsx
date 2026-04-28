@@ -28,7 +28,7 @@ export const Hero: React.FC = () => (
     <div className="mt-4 flex items-center justify-center gap-2.5 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
        <span>Free</span>
        <div className="w-1 h-1 rounded-full bg-[var(--border)]" />
-       <span>Open Source</span>
+       <a href="https://github.com/britsie1/bond-hacker" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors underline decoration-primary/30 underline-offset-2">Open Source</a>
        <div className="w-1 h-1 rounded-full bg-[var(--border)]" />
        <span>Private & On-Device</span>
     </div>
