@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import type { StrategyResult } from '../hooks/useBondState';
+import type { StrategyResult } from './calculateResults';
 
 function downloadCsv(filename: string, csvContent: string) {
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });

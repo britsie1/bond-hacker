@@ -12,8 +12,8 @@ import {
 } from 'recharts';
 import { Card } from '../ui/Card';
 import type { ChartEntry } from '../Step3';
-import type { Strategy } from '../../utils/urlState';
-import type { StrategyResult } from '../../hooks/useBondState';
+import type { Strategy } from '../../store/loanStore';
+import type { StrategyResult } from '../../utils/calculateResults';
 import { formatCurrency } from '../../utils/formatters';
 
 interface ComparisonChartProps {

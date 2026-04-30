@@ -6,7 +6,8 @@ import { StrategyCard, type StrategyUI } from './Step2/StrategyCard';
 import { StrategyAdjuster } from './Step2/StrategyAdjuster';
 import { StrategyFooter } from './Step2/StrategyFooter';
 
-import type { Strategy, StrategyResult, LoanInputs } from '../hooks/useBondState';
+import type { Strategy, LoanInputs } from '../store/loanStore';
+import type { StrategyResult } from '../utils/calculateResults';
 
 interface Step2Props {
   onNext: () => void;

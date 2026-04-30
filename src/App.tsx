@@ -4,22 +4,24 @@ import { Step1 } from './components/Step1';
 import { Step2 } from './components/Step2';
 import { Step3 } from './components/Step3';
 import { cn } from './lib/utils';
-import { useBondState } from './hooks/useBondState';
+import { useUIStore } from './store/uiStore';
+import { useLoanStore } from './store/loanStore';
+import { useCalculatedResults } from './hooks/useCalculatedResults';
 import { MessageSquare } from 'lucide-react';
 
 function App() {
-  const {
-    currentStep,
-    setCurrentStep,
-    isDarkMode,
-    setIsDarkMode,
-    inputs,
-    setInputs,
-    strategies,
-    results,
-    toggleStrategy,
-    updateStrategy
-  } = useBondState();
+  const currentStep = useUIStore((state) => state.currentStep);
+  const setCurrentStep = useUIStore((state) => state.setCurrentStep);
+  const isDarkMode = useUIStore((state) => state.isDarkMode);
+  const toggleDarkMode = useUIStore((state) => state.toggleDarkMode);
+
+  const inputs = useLoanStore((state) => state.inputs);
+  const setInputs = useLoanStore((state) => state.setInputs);
+  const strategies = useLoanStore((state) => state.strategies);
+  const toggleStrategy = useLoanStore((state) => state.toggleStrategy);
+  const updateStrategy = useLoanStore((state) => state.updateStrategy);
+
+  const results = useCalculatedResults();
 
   const [isNewLoan, setIsNewLoan] = useState(false);
 
@@ -48,7 +50,6 @@ function App() {
     window.scrollTo(0, 0);
   }, [currentStep]);
 
-  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
   const handleBack = () => {
     if (currentStep > 1) {
       // Prefer using the browser's history so the back button stack stays clean

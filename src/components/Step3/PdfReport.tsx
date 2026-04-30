@@ -1,6 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import type { LoanInputs, StrategyResult } from '../../hooks/useBondState';
+import type { LoanInputs } from '../../store/loanStore';
+import type { StrategyResult } from '../../utils/calculateResults';
 import { formatCurrency } from '../../utils/formatters';
 import { format } from 'date-fns';
 
