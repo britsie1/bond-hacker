@@ -66,7 +66,6 @@ export const PdfReport: React.FC<PdfReportProps> = ({ inputs, results, baselineR
                  <tr key={r.strategy.id} className={isBaseline ? "bg-slate-50" : ""}>
                    <td className="py-4 pr-4">
                      <div className="font-bold text-slate-900 text-base">{r.strategy.name}</div>
-                     {r.strategy.subtitle && <div className="text-xs text-slate-500 mt-0.5">{r.strategy.subtitle}</div>}
                    </td>
                    <td className="py-4 text-right font-medium text-slate-800 whitespace-nowrap">{format(r.result.payoffDate, 'MMM yyyy')}</td>
                    <td className="py-4 text-right text-slate-600 whitespace-nowrap">

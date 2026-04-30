@@ -6,7 +6,7 @@ export const formatTimeSaved = (months: number) => {
   if (months <= 0) return null;
   const yrs = Math.floor(months / 12);
   const mths = months % 12;
-  let parts = [];
+  const parts = [];
   if (yrs > 0) parts.push(`${yrs} yr${yrs > 1 ? 's' : ''}`);
   if (mths > 0) parts.push(`${mths} mth${mths > 1 ? 's' : ''}`);
   return parts.join(', ');

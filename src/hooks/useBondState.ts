@@ -107,7 +107,7 @@ export function useBondState() {
       // but we need to return something for the map
       if (!s.enabled && s.id !== 'baseline') return null;
 
-      let finalScenario: Scenario = { 
+      const finalScenario: Scenario = { 
         ...s, 
         targetPayoffDate: s.targetPayoffDate ? parseISO(s.targetPayoffDate) : undefined,
         debitOrderDay: s.id === 'debit' ? (s.debitOrderDay ?? (s.currentDebitDay || inputs.debitOrderDay)) : inputs.debitOrderDay,
@@ -131,7 +131,6 @@ export function useBondState() {
         solvedValue = calculateTargetExtraPayment(inputs, finalScenario.targetPayoffDate, finalScenario, target);
         
         // Apply the solved value to the final scenario for calculation
-        // @ts-ignore - Dynamic key assignment
         finalScenario[target] = solvedValue;
 
         if (target === 'annualExtraIncrement' && finalScenario.extraMonthlyPayment <= 0) {

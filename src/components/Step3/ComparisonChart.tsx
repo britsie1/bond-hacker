@@ -57,6 +57,7 @@ export const ComparisonChart: React.FC<ComparisonChartProps> = ({ chartData, str
                 boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)'
               }}
               itemStyle={{ padding: '2px 0' }}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               formatter={(val: any) => [formatCurrency(Number(val)), '']}
             />
             <Legend iconType="circle" wrapperStyle={{ fontSize: '10px', fontWeight: 'bold', paddingTop: '20px' }} />

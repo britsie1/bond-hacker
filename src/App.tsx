@@ -38,7 +38,7 @@ function App() {
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  }, [currentStep, setCurrentStep]);
 
   useEffect(() => {
     const historyStep = window.history.state?.step;

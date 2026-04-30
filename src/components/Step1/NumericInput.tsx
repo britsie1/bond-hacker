@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Input } from '../ui/Input';
 import { parseSafeNumber } from '../../utils/formatters';
 
@@ -22,14 +22,16 @@ export const NumericInput: React.FC<NumericInputProps> = ({
   const [displayValue, setDisplayValue] = useState<string>(
     decimals !== undefined ? value.toFixed(decimals) : value.toString()
   );
+  const [prevValue, setPrevValue] = useState<number>(value);
 
   // Sync internal string state when external numeric value changes (but only if it's a real change)
-  useEffect(() => {
+  if (value !== prevValue) {
+    setPrevValue(value);
     const numericDisplay = parseSafeNumber(displayValue);
     if (numericDisplay !== value) {
       setDisplayValue(decimals !== undefined ? value.toFixed(decimals) : value.toString());
     }
-  }, [value, decimals]);
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const raw = e.target.value;
