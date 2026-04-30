@@ -4,6 +4,7 @@ import { SummaryCard } from './Step3/SummaryCard';
 import { ComparisonChart } from './Step3/ComparisonChart';
 import { ProTips } from './Step3/ProTips';
 import { ShareDialog } from './Step3/ShareDialog';
+import { PdfReport } from './Step3/PdfReport';
 import { Card } from './ui/Card';
 import type { LoanInputs, StrategyResult } from '../hooks/useBondState';
 import type { Strategy } from '../utils/urlState';
@@ -58,6 +59,8 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategi
   }, [results, inputs.startDate]);
 
   return (
+    <>
+    <PdfReport inputs={inputs} results={results} baselineResult={baselineResult} />
     <div className="pb-10">
       <div className="text-center py-6">
         <h1 className="text-2xl font-extrabold mb-2 text-[var(--text)]">Your payoff journey</h1>
@@ -154,5 +157,6 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategi
         appState={{ inputs, strategies }}
       />
     </div>
+    </>
   );
 };
