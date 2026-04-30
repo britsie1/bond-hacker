@@ -30,8 +30,8 @@ export const ComparisonChart: React.FC<ComparisonChartProps> = ({ chartData, str
       </div>
       
       <div className="h-64 w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData} margin={{ top: 15, right: 5, left: -20, bottom: 0 }}>
+        <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
+          <LineChart data={chartData} margin={{ top: 15, right: 5, left: -20, bottom: 0 }} style={{ outline: 'none' }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" opacity={0.5} />
             <XAxis 
               dataKey="date" 

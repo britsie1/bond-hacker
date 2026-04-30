@@ -22,7 +22,7 @@ interface Step3Props {
 export interface ChartEntry {
   month: number;
   date: string;
-  [key: string]: string | number;
+  [key: string]: string | number | null;
 }
 
 export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategies }) => {
@@ -50,6 +50,12 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategi
         const schedule = r.result.schedule;
         if (currentMonth < schedule.length) {
           entry[strategyName] = Math.round(schedule[currentMonth].closingBalance);
+        } else {
+          if (data.length > 0 && data[data.length - 1][strategyName] === 0) {
+            entry[strategyName] = null;
+          } else {
+            entry[strategyName] = 0;
+          }
         }
       });
 
