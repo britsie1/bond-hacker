@@ -5,6 +5,7 @@ import { Step2 } from './components/Step2';
 import { Step3 } from './components/Step3';
 import { cn } from './lib/utils';
 import { useBondState } from './hooks/useBondState';
+import { MessageSquare } from 'lucide-react';
 
 function App() {
   const {
@@ -101,9 +102,20 @@ function App() {
         </div>
       </div>
 
-      <footer className="text-center pt-10 pb-28 opacity-40 text-[10px] uppercase font-bold tracking-widest px-10 text-[var(--text)] flex flex-col items-center gap-2">
-        <span>&copy; {new Date().getFullYear()} South African Home Loan Assistant • Built for bond hackers</span>
-        <span className="normal-case tracking-normal opacity-70">Disclaimer: This app is for informational purposes only and does not constitute financial advice.</span>
+      <footer className="text-center pt-10 pb-28 text-[10px] uppercase font-bold tracking-widest px-10 text-[var(--text)] flex flex-col items-center gap-6">
+        <a 
+          href="https://github.com/britsie1/bond-hacker/discussions" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-primary hover:border-primary transition-all shadow-sm active:scale-95 normal-case tracking-normal text-xs"
+        >
+          <MessageSquare size={16} />
+          <span>Have a suggestion? Join the discussion</span>
+        </a>
+        <div className="flex flex-col items-center gap-2 opacity-40">
+          <span>&copy; {new Date().getFullYear()} South African Home Loan Assistant • Built for bond hackers</span>
+          <span className="normal-case tracking-normal opacity-70">Disclaimer: This app is for informational purposes only and does not constitute financial advice.</span>
+        </div>
       </footer>
     </div>
   );
