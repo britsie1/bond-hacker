@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { RotateCcw, ListChecks, TrendingDown, Share, Printer } from 'lucide-react';
+import { RotateCcw, ListChecks, TrendingDown, Share, Printer, Download } from 'lucide-react';
 import { SummaryCard } from './Step3/SummaryCard';
 import { ComparisonChart } from './Step3/ComparisonChart';
 import { ProTips } from './Step3/ProTips';
@@ -9,6 +9,7 @@ import type { LoanInputs, StrategyResult } from '../hooks/useBondState';
 import type { Strategy } from '../utils/urlState';
 import { formatCurrency } from '../utils/formatters';
 import { format, addMonths } from 'date-fns';
+import { exportCombinedSummary, exportDetailedAmortization } from '../utils/csvExport';
 
 interface Step3Props {
   onReset: () => void;
@@ -64,7 +65,7 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategi
           See how your strategies stack up against the baseline.
         </p>
 
-        <div className="flex items-center justify-center gap-3 mt-6">
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
           <button 
             onClick={() => setIsShareOpen(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-primary hover:border-primary transition-all font-bold text-xs shadow-sm active:scale-95"
@@ -77,7 +78,14 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategi
             className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-primary hover:border-primary transition-all font-bold text-xs shadow-sm active:scale-95"
           >
             <Printer size={16} />
-            Print Report
+            Print
+          </button>
+          <button 
+            onClick={() => exportCombinedSummary(results)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-primary hover:border-primary transition-all font-bold text-xs shadow-sm active:scale-95"
+          >
+            <Download size={16} />
+            CSV
           </button>
         </div>
       </div>
@@ -108,9 +116,16 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategi
                        </div>
                        <div className="flex-1">
                           <div className="font-bold text-sm text-[var(--text)]">{r.strategy.name}</div>
-                          <div className="text-[11px] text-[var(--text-muted)] font-semibold">
+                          <div className="text-[11px] text-[var(--text-muted)] font-semibold mb-1.5">
                             Payoff by {format(r.result.payoffDate, 'MMM yyyy')} • {timeSaved > 0 ? `${timeSaved} mths earlier` : 'same term'}
                           </div>
+                          <button 
+                            onClick={() => exportDetailedAmortization(r)}
+                            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[10px] font-bold text-[var(--text-secondary)] hover:text-primary hover:border-primary/50 transition-colors"
+                          >
+                            <Download size={12} />
+                            Detailed CSV
+                          </button>
                        </div>
                        <div className="text-right">
                           <div className="font-bold text-sm text-success">{formatCurrency(interestSaved)}</div>
