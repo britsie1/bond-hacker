@@ -69,7 +69,7 @@ function App() {
           className="flex transition-all duration-500 ease-in-out items-start" 
           style={{ transform: `translateX(-${(currentStep - 1) * 100}%)`, width: '100%' }}
         >
-          <div className={cn("min-w-full transition-opacity duration-500", currentStep === 1 ? "opacity-100" : "opacity-0 pointer-events-none")}>
+          <div className={cn("min-w-full transition-opacity duration-500", currentStep === 1 ? "opacity-100" : "opacity-0 pointer-events-none h-0 overflow-hidden")}>
             <Step1 
               onNext={() => setCurrentStep(2)} 
               isNewLoan={isNewLoan} 
@@ -78,7 +78,7 @@ function App() {
               setInputs={setInputs}
             />
           </div>
-          <div className={cn("min-w-full transition-opacity duration-500", currentStep === 2 ? "opacity-100" : "opacity-0 pointer-events-none")}>
+          <div className={cn("min-w-full transition-opacity duration-500", currentStep === 2 ? "opacity-100" : "opacity-0 pointer-events-none h-0 overflow-hidden")}>
             <Step2 
               onNext={() => setCurrentStep(3)} 
               isNewLoan={isNewLoan} 
@@ -90,7 +90,7 @@ function App() {
               updateStrategy={updateStrategy}
             />
           </div>
-          <div className={cn("min-w-full transition-opacity duration-500", currentStep === 3 ? "opacity-100" : "opacity-0 pointer-events-none")}>
+          <div className={cn("min-w-full transition-opacity duration-500", currentStep === 3 ? "opacity-100" : "opacity-0 pointer-events-none h-0 overflow-hidden")}>
             <Step3 
               onReset={() => setCurrentStep(1)}
               inputs={inputs}
@@ -101,8 +101,9 @@ function App() {
         </div>
       </div>
 
-      <footer className="text-center py-10 opacity-40 text-[10px] uppercase font-bold tracking-widest px-10 text-[var(--text)]">
-        &copy; {new Date().getFullYear()} South African Home Loan Assistant • Built for bond hackers
+      <footer className="text-center pt-10 pb-28 opacity-40 text-[10px] uppercase font-bold tracking-widest px-10 text-[var(--text)] flex flex-col items-center gap-2">
+        <span>&copy; {new Date().getFullYear()} South African Home Loan Assistant • Built for bond hackers</span>
+        <span className="normal-case tracking-normal opacity-70">Disclaimer: This app is for informational purposes only and does not constitute financial advice.</span>
       </footer>
     </div>
   );

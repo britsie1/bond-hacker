@@ -163,7 +163,7 @@ export const LoanDetailsCard: React.FC<LoanDetailsCardProps> = ({ isNewLoan, set
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <Label>Life Assurance *</Label>
             <NumericInput prefix="R" value={inputs.monthlyAssurance || 0} onChange={(val) => setInputs({...inputs, monthlyAssurance: val})} />

@@ -110,26 +110,30 @@ export const Step3: React.FC<Step3Props> = ({ onReset, inputs, results, strategi
                 const timeSaved = (baselineResult?.result.totalMonths || 0) - r.result.totalMonths;
 
                 return (
-                    <div key={r.strategy.id} className="flex items-center gap-3 p-4 border-2 border-[var(--border)] rounded-2xl">
-                       <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${r.strategy.color}10`, color: r.strategy.color }}>
-                          <TrendingDown size={18} />
-                       </div>
-                       <div className="flex-1">
-                          <div className="font-bold text-sm text-[var(--text)]">{r.strategy.name}</div>
-                          <div className="text-[11px] text-[var(--text-muted)] font-semibold mb-1.5">
-                            Payoff by {format(r.result.payoffDate, 'MMM yyyy')} • {timeSaved > 0 ? `${timeSaved} mths earlier` : 'same term'}
+                    <div key={r.strategy.id} className="p-4 border-2 border-[var(--border)] rounded-2xl flex flex-col gap-3">
+                       <div className="flex items-start sm:items-center gap-3">
+                          <div className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${r.strategy.color}10`, color: r.strategy.color }}>
+                             <TrendingDown size={18} />
                           </div>
+                          <div className="flex-1 min-w-0">
+                             <div className="font-bold text-sm text-[var(--text)] truncate">{r.strategy.name}</div>
+                             <div className="text-[11px] text-[var(--text-muted)] font-semibold">
+                               Payoff by {format(r.result.payoffDate, 'MMM yyyy')} <span className="hidden sm:inline">• </span><br className="sm:hidden" />{timeSaved > 0 ? `${timeSaved} mths earlier` : 'same term'}
+                             </div>
+                          </div>
+                          <div className="text-right shrink-0">
+                             <div className="font-bold text-sm text-success">{formatCurrency(interestSaved)}</div>
+                             <div className="text-[10px] text-[var(--text-muted)] font-bold uppercase">saved</div>
+                          </div>
+                       </div>
+                       <div className="flex pl-[52px]">
                           <button 
                             onClick={() => exportDetailedAmortization(r)}
-                            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[10px] font-bold text-[var(--text-secondary)] hover:text-primary hover:border-primary/50 transition-colors"
+                            className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[10px] font-bold text-[var(--text-secondary)] hover:text-primary hover:border-primary/50 transition-colors w-full sm:w-auto"
                           >
                             <Download size={12} />
                             Detailed CSV
                           </button>
-                       </div>
-                       <div className="text-right">
-                          <div className="font-bold text-sm text-success">{formatCurrency(interestSaved)}</div>
-                          <div className="text-[10px] text-[var(--text-muted)] font-bold uppercase">saved</div>
                        </div>
                     </div>
                 );

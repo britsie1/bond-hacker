@@ -90,7 +90,7 @@ export const Step2: React.FC<Step2Props> = ({
   };
 
   return (
-    <div className="pb-40">
+    <div className="pb-4">
       <div className="text-center py-6">
         <h1 className="text-2xl font-extrabold mb-2 text-[var(--text)]">Pick your strategy</h1>
         <p className="text-sm text-[var(--text-secondary)] max-w-[320px] mx-auto">
